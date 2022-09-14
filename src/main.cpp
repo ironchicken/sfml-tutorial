@@ -5,8 +5,9 @@ int main(int argc, char* argv[]) {
     sf::CircleShape shape{ 100.f };
     shape.setFillColor(sf::Color::Green);
 
+    sf::Event event;
+
     while (window.isOpen()) {
-        sf::Event event;
         while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed) {
                 window.close();
