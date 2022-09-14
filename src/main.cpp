@@ -22,6 +22,27 @@ int main(int argc, char* argv[]) {
             if (event.type == sf::Event::Closed) {
                 window.close();
             }
+            if (event.type == sf::Event::KeyPressed) {
+                switch (event.key.code) {
+                case sf::Keyboard::Q:
+                    window.close();
+                    break;
+                case sf::Keyboard::W:
+                    velocityY = -100.0;
+                    break;
+                case sf::Keyboard::S:
+                    velocityY = 100.0;
+                    break;
+                case sf::Keyboard::A:
+                    velocityX = -100.0;
+                    break;
+                case sf::Keyboard::D:
+                    velocityX = 100.0;
+                    break;
+                default:
+                    break;
+                }
+            }
         }
 
         auto elapsed = clock.restart();
