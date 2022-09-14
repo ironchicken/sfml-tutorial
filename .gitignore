@@ -1,0 +1,10 @@
+*~
+.cache/
+.ccls-cache/
+CMakeCache.txt
+CMakeFiles/
+build/
+Makefile
+cmake_install.cmake
+compile_commands.json
+tmp/
