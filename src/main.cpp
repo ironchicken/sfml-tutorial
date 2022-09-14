@@ -1,7 +1,7 @@
 #include <SFML/Graphics.hpp>
 
 int main(int argc, char* argv[]) {
-    sf::RenderWindow window{ sf::VideoMode(200, 200), "SFML Tutorial" };
+    sf::RenderWindow window{ sf::VideoMode(640, 480), "SFML Tutorial" };
     sf::CircleShape shape{ 100.f };
     shape.setFillColor(sf::Color::Green);
 
