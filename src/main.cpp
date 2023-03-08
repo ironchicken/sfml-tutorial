@@ -6,7 +6,7 @@ int main(int argc, char* argv[]) {
     shape.setFillColor(sf::Color::Green);
     shape.setRadius(5.0);
 
-    const int frameRate { 30 };
+    const int frameRate { 60 };
     const sf::Time targetDelayMS = sf::milliseconds(1000 / frameRate);
 
     sf::Event event;
@@ -28,16 +28,16 @@ int main(int argc, char* argv[]) {
                     window.close();
                     break;
                 case sf::Keyboard::W:
-                    velocityY = -100.0;
+                    velocityY = -140.0;
                     break;
                 case sf::Keyboard::S:
-                    velocityY = 100.0;
+                    velocityY = 140.0;
                     break;
                 case sf::Keyboard::A:
-                    velocityX = -100.0;
+                    velocityX = -140.0;
                     break;
                 case sf::Keyboard::D:
-                    velocityX = 100.0;
+                    velocityX = 140.0;
                     break;
                 default:
                     break;
