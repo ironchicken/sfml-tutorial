@@ -1,10 +1,11 @@
+#include <algorithm>
+#include <memory>
 #include "Game.hpp"
+#include "Ball.hpp"
 
 Game::Game() : window(sf::RenderWindow(sf::VideoMode(640, 480), "SFML Tutorial"))
-             , shape(sf::CircleShape(100.f))
 {
-    shape.setFillColor(sf::Color::Green);
-    shape.setRadius(5.0);
+    entities.emplace_back(std::make_unique<Ball>());
 }
 
 Game::~Game() { }
@@ -53,27 +54,13 @@ void Game::processInput() {
 }
 
 void Game::update(sf::Time elapsed) {
-    if (circleX >= 640 && velocityX > 0.0) {
-        velocityX = -140.0;
-    }
-    if (circleX <= 0 && velocityX < 0.0) {
-        velocityX = 140.0;
-    }
-    if (circleY >= 480 && velocityY > 0.0) {
-        velocityY = -140.0;
-    }
-    if (circleY <= 0 && velocityY < 0.0) {
-        velocityY = 140.0;
-    }
-
-    circleX += elapsed.asSeconds() * velocityX;
-    circleY += elapsed.asSeconds() * velocityY;
-
-    shape.setPosition(circleX, circleY);
+    std::for_each(entities.begin(), entities.end(), [&elapsed](auto e) { e.update(elapsed); });
 }
 
 void Game::render(sf::Time elapsed) {
     window.clear();
-    window.draw(shape);
+
+    std::for_each(entities.begin(), entities.end(), [this](auto e) { e.render(window); });
+
     window.display();
 }
