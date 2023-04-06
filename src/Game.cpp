@@ -6,6 +6,7 @@
 Game::Game() : window(sf::RenderWindow(sf::VideoMode(640, 480), "SFML Tutorial"))
 {
     entities.emplace_back(std::make_unique<Ball>());
+    ballIndex = entities.size() - 1;
 }
 
 Game::~Game() { }
@@ -35,16 +36,16 @@ void Game::processInput() {
                 window.close();
                 break;
             case sf::Keyboard::W:
-                velocityY = -140.0;
+                entities[ballIndex]->setVelocityY(-140.f);
                 break;
             case sf::Keyboard::S:
-                velocityY = 140.0;
+                entities[ballIndex]->setVelocityY(140.f);
                 break;
             case sf::Keyboard::A:
-                velocityX = -140.0;
+                entities[ballIndex]->setVelocityX(-140.f);
                 break;
             case sf::Keyboard::D:
-                velocityX = 140.0;
+                entities[ballIndex]->setVelocityX(140.f);
                 break;
             default:
                 break;
@@ -54,13 +55,13 @@ void Game::processInput() {
 }
 
 void Game::update(sf::Time elapsed) {
-    std::for_each(entities.begin(), entities.end(), [&elapsed](auto e) { e.update(elapsed); });
+    std::for_each(entities.cbegin(), entities.cend(), [&elapsed](auto &e) { e->update(elapsed); });
 }
 
 void Game::render(sf::Time elapsed) {
     window.clear();
 
-    std::for_each(entities.begin(), entities.end(), [this](auto e) { e.render(window); });
+    std::for_each(entities.cbegin(), entities.cend(), [this](auto &e) { e->render(window); });
 
     window.display();
 }

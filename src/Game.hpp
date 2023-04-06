@@ -25,6 +25,7 @@ private:
     sf::Clock clock;
 
     std::vector<std::unique_ptr<GameEntity>> entities;
+    unsigned int ballIndex;
 };
 
 #endif
