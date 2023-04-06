@@ -2,7 +2,6 @@
 #define BALL_H
 
 #include "GameEntity.hpp"
-#include "SFML/System/Vector2.hpp"
 
 class Ball : public GameEntity {
 public:
@@ -13,7 +12,6 @@ public:
 
 private:
     sf::CircleShape shape;
-    sf::Vector2f velocity;
 };
 
 #endif

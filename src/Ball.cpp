@@ -1,8 +1,7 @@
 #include "Ball.hpp"
 
-Ball::Ball() : GameEntity({ 640.f / 2.f, 480.f / 2.f }, 10, 10)
+Ball::Ball() : GameEntity({ 640.f / 2.f, 480.f / 2.f }, { 140.f, 140.f }, 10, 10)
              , shape(sf::CircleShape(100.f))
-             , velocity({ 140.f, 140.f })
 {
     shape.setFillColor(sf::Color::Green);
     shape.setRadius(5.f);
@@ -17,21 +16,23 @@ void Ball::render(sf::RenderWindow& window) {
 void Ball::update(sf::Time elapsed) {
     auto position = getPosition();
 
-    if (position.x >= 640 && velocity.x > 0.f) {
-        velocity.x = -140.f;
+    if (position.x >= 640 && getVelocity().x > 0.f) {
+        setVelocityX(-140.f);
     }
-    if (position.x <= 0 && velocity.x < 0.f) {
-        velocity.x = 140.f;
+    if (position.x <= 0 && getVelocity().x < 0.f) {
+        setVelocityX(140.f);
     }
-    if (position.y >= 480 && velocity.y > 0.f) {
-        velocity.y = -140.f;
+    if (position.y >= 480 && getVelocity().y > 0.f) {
+        setVelocityY(-140.f);
     }
-    if (position.y <= 0 && velocity.y < 0.f) {
-        velocity.y = 140.f;
+    if (position.y <= 0 && getVelocity().y < 0.f) {
+        setVelocityY(140.f);
     }
 
-    position.x += elapsed.asSeconds() * velocity.x;
-    position.y += elapsed.asSeconds() * velocity.y;
+    position.x += elapsed.asSeconds() * getVelocity().x;
+    position.y += elapsed.asSeconds() * getVelocity().y;
+
+    setPosition(position);
 
     shape.setPosition(position.x, position.y);
 }
