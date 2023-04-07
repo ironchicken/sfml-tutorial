@@ -5,6 +5,7 @@
 #include <memory>
 #include <SFML/Graphics.hpp>
 #include "GameEntity.hpp"
+#include "InputHandler.hpp"
 
 class Game {
 public:
@@ -26,6 +27,8 @@ private:
 
     std::vector<std::unique_ptr<GameEntity>> entities;
     unsigned int ballIndex;
+
+    InputHandler inputHandler;
 };
 
 #endif

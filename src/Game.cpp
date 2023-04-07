@@ -2,8 +2,9 @@
 #include <memory>
 #include "Game.hpp"
 #include "Ball.hpp"
+#include "InputHandler.hpp"
 
-Game::Game() : window(sf::RenderWindow(sf::VideoMode(640, 480), "SFML Tutorial"))
+Game::Game() : window(sf::RenderWindow(sf::VideoMode(640, 480), "SFML Tutorial")), inputHandler(window)
 {
     entities.emplace_back(std::make_unique<Ball>());
     ballIndex = entities.size() - 1;
@@ -31,24 +32,9 @@ void Game::processInput() {
             window.close();
         }
         if (event.type == sf::Event::KeyPressed) {
-            switch (event.key.code) {
-            case sf::Keyboard::Q:
-                window.close();
-                break;
-            case sf::Keyboard::W:
-                entities[ballIndex]->setVelocityY(-140.f);
-                break;
-            case sf::Keyboard::S:
-                entities[ballIndex]->setVelocityY(140.f);
-                break;
-            case sf::Keyboard::A:
-                entities[ballIndex]->setVelocityX(-140.f);
-                break;
-            case sf::Keyboard::D:
-                entities[ballIndex]->setVelocityX(140.f);
-                break;
-            default:
-                break;
+            auto command = inputHandler.handleInput(event);
+            if (command != nullptr) {
+                command->execute(entities[ballIndex]);
             }
         }
     }
